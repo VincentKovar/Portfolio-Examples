@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-slate-950 text-slate-100">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Misfits & Machines // Founding Growth Engine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            pink: '#FF2E93',
+                            violet: '#7A1FFA',
+                            cyan: '#00F0FF',
+                            dark: '#0B071E',
+                            card: '#130E2E',
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: radial-gradient(circle at 50% 0%, #1e1145 0%, #080413 70%, #03010a 100%);
+        }
+        .neon-border-pink {
+            box-shadow: 0 0 15px rgba(255, 46, 147, 0.15), inset 0 0 15px rgba(255, 46, 147, 0.05);
+            border: 1px solid rgba(255, 46, 147, 0.25);
+        }
+        .neon-border-violet {
+            box-shadow: 0 0 15px rgba(122, 31, 250, 0.15), inset 0 0 15px rgba(122, 31, 250, 0.05);
+            border: 1px solid rgba(122, 31, 250, 0.25);
+        }
+        .neon-border-cyan {
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.15), inset 0 0 15px rgba(0, 240, 255, 0.05);
+            border: 1px solid rgba(0, 240, 255, 0.25);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #080413;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e1145;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #7A1FFA;
+        }
+    </style>
+</head>
+<body class="h-full overflow-hidden flex flex-col antialiased">
+
+    <!-- Top Navigation Header -->
+    <header class="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md px-6 py-4 flex flex-shrink-0 items-center justify-between z-10">
+        <div class="flex items-center gap-3">
+            <div class="h-10 w-10 rounded-xl bg-gradient-to-tr from-brand-pink to-brand-violet flex items-center justify-center font-extrabold text-white text-xl tracking-wider shadow-lg shadow-brand-pink/20">
+                M
+            </div>
+            <div>
+                <h1 class="text-lg font-bold tracking-tight text-white flex items-center gap-2">
+                    MISFITS & MACHINES 
+                    <span class="text-xs font-mono font-normal py-0.5 px-2 rounded bg-brand-pink/10 border border-brand-pink/30 text-brand-pink uppercase tracking-widest">
+                        GTM Platform v1.1
+                    </span>
+                </h1>
+                <p class="text-xs text-slate-400">Founding Commercial Operating System Demo</p>
+            </div>
+        </div>
+        
+        <div class="hidden md:flex items-center gap-6 text-sm">
+            <div class="flex items-center gap-2 bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-lg">
+                <span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span class="font-mono text-xs text-slate-300">Target Role: Head of Growth & Marketing</span>
+            </div>
+            <a href="https://misfitsandmachines.com/" target="_blank" class="text-slate-400 hover:text-white transition flex items-center gap-1.5">
+                <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                misfitsandmachines.com
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Workspace Container -->
+    <div class="flex-1 flex overflow-hidden">
+        
+        <!-- Left Sidebar Navigation -->
+        <aside class="w-20 md:w-64 bg-slate-950/40 border-r border-slate-900 flex flex-col flex-shrink-0 justify-between">
+            <div class="p-3 md:p-4 space-y-2">
+                <div class="px-3 py-2 text-xs font-bold text-slate-500 uppercase tracking-widest hidden md:block">
+                    OPERATIONAL MODULES
+                </div>
+                
+                <button onclick="switchTab('simulator')" id="btn-simulator" class="w-full flex items-center gap-3 px-3 py-3 rounded-xl transition text-left group bg-gradient-to-r from-brand-violet/20 to-transparent border-l-4 border-brand-violet text-white">
+                    <div class="w-8 h-8 rounded-lg bg-brand-violet/10 flex items-center justify-center text-brand-violet group-hover:bg-brand-violet/20 transition-all">
+                        <i class="fa-solid fa-calculator-combined text-sm"></i>
+                    </div>
+                    <div class="hidden md:block">
+                        <div class="text-sm font-semibold">Value Simulator</div>
+                        <div class="text-[10px] text-slate-400">Partner revenue models</div>
+                    </div>
+                </button>
+
+                <button onclick="switchTab('gtm')" id="btn-gtm" class="w-full flex items-center gap-3 px-3 py-3 rounded-xl transition text-left group text-slate-400 hover:text-slate-100 hover:bg-slate-900/60 border-l-4 border-transparent">
+                    <div class="w-8 h-8 rounded-lg bg-slate-900 flex items-center justify-center text-slate-400 group-hover:bg-slate-800 transition-all">
+                        <i class="fa-solid fa-diagram-project text-sm"></i>
+                    </div>
+                    <div class="hidden md:block">
+                        <div class="text-sm font-semibold">AI GTM Stack</div>
+                        <div class="text-[10px] text-slate-400">Autonomous workflow canvas</div>
+                    </div>
+                </button>
+
+                <button onclick="switchTab('copilot')" id="btn-copilot" class="w-full flex items-center gap-3 px-3 py-3 rounded-xl transition text-left group text-slate-400 hover:text-slate-100 hover:bg-slate-900/60 border-l-4 border-transparent">
+                    <div class="w-8 h-8 rounded-lg bg-slate-900 flex items-center justify-center text-slate-400 group-hover:bg-slate-800 transition-all">
+                        <i class="fa-solid fa-wand-magic-sparkles text-sm"></i>
+                    </div>
+                    <div class="hidden md:block">
+                        <div class="text-sm font-semibold">Outreach Copilot</div>
+                        <div class="text-[10px] text-slate-400">Dynamic pitch architect</div>
+                    </div>
+                </button>
+            </div>
+
+            <!-- Profile Info at Bottom of Sidebar -->
+            <div class="p-3 md:p-4 border-t border-slate-900 bg-slate-950/80">
+                <div class="flex items-center gap-3">
+                    <div class="h-9 w-9 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-brand-pink font-bold">
+                        VC
+                    </div>
+                    <div class="hidden md:block overflow-hidden">
+                        <div class="text-xs font-semibold text-white truncate">Vibe Coder Applicant</div>
+                        <div class="text-[10px] text-emerald-400 font-mono tracking-tight flex items-center gap-1">
+                            <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span> Live Demo Ready
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Dynamic Workspace Content View -->
+        <main class="flex-1 overflow-y-auto p-4 md:p-8 space-y-8">
+            
+            <!-- Tab 1: Aggregator Value Monetization Simulator -->
+            <section id="tab-simulator" class="space-y-6">
+                <!-- Explanatory Header Box -->
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-slate-900/40 p-5 rounded-2xl border border-slate-800/80">
+                    <div class="space-y-1">
+                        <h2 class="text-xl md:text-2xl font-extrabold text-white tracking-tight flex items-center gap-2">
+                            <i class="fa-solid fa-chart-line text-brand-pink text-lg"></i>
+                            Aggregator Value Monetization Simulator
+                        </h2>
+                        <p class="text-sm text-slate-400">Prove the high-margin ARR potential to enterprise platforms in their native language—revenue.</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <span class="py-1 px-3 bg-brand-violet/15 text-brand-violet text-xs font-semibold rounded-lg border border-brand-violet/30">
+                            Month 4-6 Blueprint
+                        </span>
+                        <span class="py-1 px-3 bg-brand-pink/15 text-brand-pink text-xs font-semibold rounded-lg border border-brand-pink/30">
+                            Enterprise GTM Lever
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Simulation Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    
+                    <!-- Sliders & Selectors Column (Left) -->
+                    <div class="lg:col-span-7 bg-brand-card/30 rounded-3xl p-6 border border-slate-800/80 space-y-6">
+                        <div class="space-y-3">
+                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider">Choose Platform Aggregator Archetype</label>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+                                <button onclick="selectArchetype('shopify')" id="arch-shopify" class="p-3 text-center rounded-xl bg-slate-900/60 border border-slate-800 hover:border-brand-pink text-slate-300 transition-all font-semibold text-xs py-2.5 active-archetype border-brand-pink text-white bg-brand-pink/5">
+                                    <i class="fa-brands fa-shopify block text-base mb-1 text-brand-pink"></i>
+                                    Shopify
+                                </button>
+                                <button onclick="selectArchetype('hubspot')" id="arch-hubspot" class="p-3 text-center rounded-xl bg-slate-900/60 border border-slate-800 hover:border-brand-pink text-slate-300 transition-all font-semibold text-xs py-2.5">
+                                    <i class="fa-solid fa-hubspot block text-base mb-1 text-amber-500"></i>
+                                    HubSpot
+                                </button>
+                                <button onclick="selectArchetype('klaviyo')" id="arch-klaviyo" class="p-3 text-center rounded-xl bg-slate-900/60 border border-slate-800 hover:border-brand-pink text-slate-300 transition-all font-semibold text-xs py-2.5">
+                                    <i class="fa-solid fa-paper-plane block text-base mb-1 text-brand-cyan"></i>
+                                    Klaviyo
+                                </button>
+                                <button onclick="selectArchetype('custom')" id="arch-custom" class="p-3 text-center rounded-xl bg-slate-900/60 border border-slate-800 hover:border-brand-pink text-slate-300 transition-all font-semibold text-xs py-2.5">
+                                    <i class="fa-solid fa-sliders block text-base mb-1 text-violet-400"></i>
+                                    Custom
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Parameter Adjustments -->
+                        <div class="space-y-5 pt-4 border-t border-slate-800/50">
+                            <!-- Slider 1 -->
+                            <div class="space-y-2">
+                                <div class="flex justify-between items-center text-sm">
+                                    <span class="text-slate-300 font-medium flex items-center gap-1.5">
+                                        <i class="fa-solid fa-users text-slate-500 text-xs"></i> Total Active Merchant Base
+                                    </span>
+                                    <span id="label-userBase" class="font-mono text-white font-bold text-base bg-slate-900/80 px-2 py-0.5 rounded border border-slate-800">500,000</span>
+                                </div>
+                                <input type="range" id="input-userBase" min="10000" max="2000000" step="10000" value="500000" oninput="calculateSimulator()" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-brand-pink">
+                                <div class="flex justify-between text-[10px] text-slate-500 font-mono">
+                                    <span>10,000</span>
+                                    <span>1,000,000</span>
+                                    <span>2,000,000</span>
+                                </div>
+                            </div>
+
+                            <!-- Slider 2 -->
+                            <div class="space-y-2">
+                                <div class="flex justify-between items-center text-sm">
+                                    <span class="text-slate-300 font-medium flex items-center gap-1.5">
+                                        <i class="fa-solid fa-chart-line text-slate-500 text-xs"></i> Target Integration Adoption
+                                    </span>
+                                    <span id="label-adoptionRate" class="font-mono text-white font-bold text-base bg-slate-900/80 px-2 py-0.5 rounded border border-slate-800">3.0%</span>
+                                </div>
+                                <input type="range" id="input-adoptionRate" min="0.5" max="15" step="0.1" value="3" oninput="calculateSimulator()" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-brand-violet">
+                                <div class="flex justify-between text-[10px] text-slate-500 font-mono">
+                                    <span>0.5%</span>
+                                    <span>7.5%</span>
+                                    <span>15.0%</span>
+                                </div>
+                            </div>
+
+                            <!-- Slider 3 -->
+                            <div class="space-y-2">
+                                <div class="flex justify-between items-center text-sm">
+                                    <span class="text-slate-300 font-medium flex items-center gap-1.5">
+                                        <i class="fa-solid fa-credit-card text-slate-500 text-xs"></i> Average Monthly AI Asset Ad Spend
+                                    </span>
+                                    <span id="label-monthlySpend" class="font-mono text-white font-bold text-base bg-slate-900/80 px-2 py-0.5 rounded border border-slate-800">$250</span>
+                                </div>
+                                <input type="range" id="input-monthlySpend" min="50" max="2500" step="25" value="250" oninput="calculateSimulator()" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-brand-cyan">
+                                <div class="flex justify-between text-[10px] text-slate-500 font-mono">
+                                    <span>$50</span>
+                                    <span>$1,250</span>
+                                    <span>$2,500</span>
+                                </div>
+                            </div>
+
+                            <!-- Slider 4 -->
+                            <div class="space-y-2">
+                                <div class="flex justify-between items-center text-sm">
+                                    <span class="text-slate-300 font-medium flex items-center gap-1.5">
+                                        <i class="fa-solid fa-handshake text-slate-500 text-xs"></i> Partner Revenue Share
+                                    </span>
+                                    <span id="label-revShare" class="font-mono text-white font-bold text-base bg-slate-900/80 px-2 py-0.5 rounded border border-slate-800">30%</span>
+                                </div>
+                                <input type="range" id="input-revShare" min="10" max="50" step="5" value="30" oninput="calculateSimulator()" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-brand-pink">
+                                <div class="flex justify-between text-[10px] text-slate-500 font-mono">
+                                    <span>10%</span>
+                                    <span>30%</span>
+                                    <span>50%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Outputs Display (Right) -->
+                    <div class="lg:col-span-5 flex flex-col justify-between gap-6">
+                        <div class="bg-slate-900/60 rounded-3xl p-6 border border-slate-800/80 flex-1 flex flex-col justify-between space-y-6">
+                            
+                            <!-- KPI Card 1: Active Accounts -->
+                            <div class="bg-slate-950/40 p-4 rounded-2xl border border-slate-800/60 flex items-center justify-between">
+                                <div class="space-y-0.5">
+                                    <span class="text-xs text-slate-400 font-semibold uppercase tracking-wider block">Adopting Accounts</span>
+                                    <span id="output-adoptingAccounts" class="text-2xl font-extrabold text-white">15,000</span>
+                                </div>
+                                <div class="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800/80 flex items-center justify-center text-brand-pink">
+                                    <i class="fa-solid fa-users-viewfinder"></i>
+                                </div>
+                            </div>
+
+                            <!-- KPI Card 2: Partner Annual Net New ARR -->
+                            <div class="bg-brand-violet/10 p-5 rounded-2xl border border-brand-violet/35 flex items-center justify-between relative overflow-hidden">
+                                <div class="absolute -right-6 -bottom-6 text-brand-violet/10 text-8xl font-black select-none pointer-events-none">ARR</div>
+                                <div class="space-y-1 relative z-10">
+                                    <span class="text-xs text-brand-violet font-bold uppercase tracking-wider block">Partner Net New ARR</span>
+                                    <span id="output-partnerARR" class="text-3xl md:text-4xl font-black text-white">$13.5M</span>
+                                    <p class="text-[10px] text-slate-400">Pure net-new high-margin revenue injected into platform ecosystem</p>
+                                </div>
+                                <div class="w-12 h-12 rounded-2xl bg-brand-violet flex items-center justify-center text-white shadow-lg shadow-brand-violet/30 relative z-10">
+                                    <i class="fa-solid fa-piggy-bank text-xl animate-pulse"></i>
+                                </div>
+                            </div>
+
+                            <!-- KPI Card 3: M&M Retained ARR -->
+                            <div class="bg-slate-950/40 p-4 rounded-2xl border border-slate-800/60 flex items-center justify-between">
+                                <div class="space-y-0.5">
+                                    <span class="text-xs text-slate-400 font-semibold uppercase tracking-wider block">Misfits & Machines Net Share</span>
+                                    <span id="output-retainedARR" class="text-xl font-bold text-white">$31.5M</span>
+                                </div>
+                                <div class="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800/80 flex items-center justify-center text-brand-cyan">
+                                    <i class="fa-solid fa-sack-dollar"></i>
+                                </div>
+                            </div>
+
+                            <!-- Revenue Split visualization ring or visual bar -->
+                            <div class="space-y-2 pt-2">
+                                <span class="text-xs font-bold text-slate-400 uppercase tracking-widest block">Partnership Revenue Distribution</span>
+                                <div class="h-6 w-full bg-slate-850 rounded-full flex overflow-hidden border border-slate-800 p-0.5">
+                                    <div id="bar-partner" class="bg-gradient-to-r from-brand-violet to-purple-600 rounded-full transition-all duration-300" style="width: 30%"></div>
+                                    <div id="bar-mm" class="bg-gradient-to-r from-brand-pink to-pink-600 rounded-full ml-1 transition-all duration-300 flex-1" style="width: 70%"></div>
+                                </div>
+                                <div class="flex justify-between items-center text-xs font-mono text-slate-400 pt-1">
+                                    <span class="flex items-center gap-1"><span class="h-2.5 w-2.5 rounded bg-brand-violet"></span> Partner Portion</span>
+                                    <span class="flex items-center gap-1"><span class="h-2.5 w-2.5 rounded bg-brand-pink"></span> Misfits & Machines Portion</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pitch CTA integration -->
+                        <div class="bg-gradient-to-r from-brand-pink/20 to-brand-violet/20 border border-slate-800 p-5 rounded-2xl flex items-center justify-between gap-4">
+                            <div class="space-y-0.5">
+                                <h4 class="text-sm font-bold text-white">Generate Outreach Proposal</h4>
+                                <p class="text-xs text-slate-400">Instantly pass these exact financial variables to our GTM Outreach AI model.</p>
+                            </div>
+                            <button onclick="transferToCopilot()" class="py-2.5 px-4 bg-white text-slate-950 text-xs font-extrabold rounded-xl hover:bg-slate-100 active:scale-95 transition-all flex items-center gap-1.5 whitespace-nowrap shadow-lg shadow-white/5">
+                                Sync Metrics <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Tab 2: AI-Native GTM Velocity Engine Canvas -->
+            <section id="tab-gtm" class="space-y-6 hidden">
+                <!-- Explanatory Header Box -->
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-slate-900/40 p-5 rounded-2xl border border-slate-800/80">
+                    <div class="space-y-1">
+                        <h2 class="text-xl md:text-2xl font-extrabold text-white tracking-tight flex items-center gap-2">
+                            <i class="fa-solid fa-network-wired text-brand-cyan text-lg"></i>
+                            The Autonomous AI GTM Velocity Engine
+                        </h2>
+                        <p class="text-sm text-slate-400">Visualize your target month-1 workflow: how a team of one operates with the leverage of an agency scale.</p>
+                    </div>
+                    <button onclick="runGtmDryRun()" id="btn-dryrun" class="py-2 px-4 bg-brand-cyan/15 text-brand-cyan border border-brand-cyan/45 text-xs font-bold rounded-xl hover:bg-brand-cyan/25 active:scale-95 transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-play"></i> Run Live Pipeline Test
+                    </button>
+                </div>
+
+                <!-- Simulation Canvas & Control Board -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    
+                    <!-- Nodes Layout Graph Pane -->
+                    <div class="lg:col-span-8 bg-brand-card/20 rounded-3xl p-6 border border-slate-800/80 relative overflow-hidden flex flex-col justify-between min-h-[500px]">
+                        
+                        <!-- Connecting Grid Lines / Canvas Aesthetic Background -->
+                        <div class="absolute inset-0 bg-[linear-gradient(to_right,#130d2e_1px,transparent_1px),linear-gradient(to_bottom,#130d2e_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-30 pointer-events-none"></div>
+
+                        <!-- Top Interactive Toggle Options -->
+                        <div class="flex items-center justify-between text-xs font-mono mb-4 relative z-10">
+                            <span class="text-slate-400 uppercase tracking-widest font-semibold flex items-center gap-1">
+                                <span class="h-2 w-2 rounded-full bg-brand-cyan"></span> Active GTM Sequence Mapping
+                            </span>
+                            <span class="text-slate-500">Node-to-Node Payload Transfer</span>
+                        </div>
+
+                        <!-- The Workflow Visual Chain (Flex/Grid chain depicting integrations) -->
+                        <div class="grid grid-cols-1 md:grid-cols-5 gap-4 relative z-10 my-auto py-8">
+                            
+                            <!-- Node 1: Clay -->
+                            <div id="node-1" class="bg-slate-900/90 border border-slate-800 p-4 rounded-2xl flex flex-col items-center text-center space-y-2 transition-all duration-300">
+                                <div class="w-12 h-12 rounded-xl bg-slate-950 flex items-center justify-center text-white font-mono text-xs font-black border border-slate-800 shadow-md">
+                                    <span class="text-brand-pink text-base">C</span>Y
+                                </div>
+                                <div class="space-y-0.5">
+                                    <div class="text-xs font-bold text-slate-200">Clay Grid</div>
+                                    <div class="text-[9px] text-slate-500 font-mono">Target Enrichment</div>
+                                </div>
+                                <span class="text-[9px] font-mono px-2 py-0.5 bg-brand-pink/5 border border-brand-pink/10 rounded-full text-brand-pink">Sourcing</span>
+                            </div>
+
+                            <!-- Transition Arrow -->
+                            <div class="flex items-center justify-center text-slate-700 h-full py-2">
+                                <i class="fa-solid fa-angles-right text-sm rotate-90 md:rotate-0"></i>
+                            </div>
+
+                            <!-- Node 2: Apollo -->
+                            <div id="node-2" class="bg-slate-900/90 border border-slate-800 p-4 rounded-2xl flex flex-col items-center text-center space-y-2 transition-all duration-300">
+                                <div class="w-12 h-12 rounded-xl bg-slate-950 flex items-center justify-center text-amber-500 text-xl font-bold border border-slate-800 shadow-md">
+                                    <i class="fa-solid fa-compass"></i>
+                                </div>
+                                <div class="space-y-0.5">
+                                    <div class="text-xs font-bold text-slate-200">Apollo DB</div>
+                                    <div class="text-[9px] text-slate-500 font-mono">Exec Contact Scrape</div>
+                                </div>
+                                <span class="text-[9px] font-mono px-2 py-0.5 bg-amber-500/5 border border-amber-500/10 rounded-full text-amber-500">Contact Sync</span>
+                            </div>
+
+                            <!-- Transition Arrow -->
+                            <div class="flex items-center justify-center text-slate-700 h-full py-2">
+                                <i class="fa-solid fa-angles-right text-sm rotate-90 md:rotate-0"></i>
+                            </div>
+
+                            <!-- Node 3: Claude -->
+                            <div id="node-3" class="bg-slate-900/90 border border-slate-800 p-4 rounded-2xl flex flex-col items-center text-center space-y-2 transition-all duration-300">
+                                <div class="w-12 h-12 rounded-xl bg-slate-950 flex items-center justify-center text-orange-400 text-xl font-bold border border-slate-800 shadow-md">
+                                    <i class="fa-solid fa-brain"></i>
+                                </div>
+                                <div class="space-y-0.5">
+                                    <div class="text-xs font-bold text-slate-200">Claude Agent</div>
+                                    <div class="text-[9px] text-slate-500 font-mono">Bespoke Research</div>
+                                </div>
+                                <span class="text-[9px] font-mono px-2 py-0.5 bg-orange-400/5 border border-orange-400/10 rounded-full text-orange-400">ARR Synthesis</span>
+                            </div>
+
+                        </div>
+
+                        <!-- Secondary visual group below -->
+                        <div class="grid grid-cols-1 md:grid-cols-5 gap-4 relative z-10 my-auto pb-8">
+                            <div class="md:col-start-2">
+                                <!-- Node 4: ElevenLabs -->
+                                <div id="node-4" class="bg-slate-900/90 border border-slate-800 p-4 rounded-2xl flex flex-col items-center text-center space-y-2 transition-all duration-300">
+                                    <div class="w-12 h-12 rounded-xl bg-slate-950 flex items-center justify-center text-brand-violet text-xl font-bold border border-slate-800 shadow-md">
+                                        <i class="fa-solid fa-microphone-lines"></i>
+                                    </div>
+                                    <div class="space-y-0.5">
+                                        <div class="text-xs font-bold text-slate-200">ElevenLabs</div>
+                                        <div class="text-[9px] text-slate-500 font-mono">Synthetic Audio Pitch</div>
+                                    </div>
+                                    <span class="text-[9px] font-mono px-2 py-0.5 bg-brand-violet/5 border border-brand-violet/10 rounded-full text-brand-violet">Cloned Voice</span>
+                                </div>
+                            </div>
+
+                            <!-- Transition Arrow -->
+                            <div class="flex items-center justify-center text-slate-700 h-full py-2">
+                                <i class="fa-solid fa-angles-right text-sm rotate-90 md:rotate-0"></i>
+                            </div>
+
+                            <div>
+                                <!-- Node 5: Smartlead -->
+                                <div id="node-5" class="bg-slate-900/90 border border-slate-800 p-4 rounded-2xl flex flex-col items-center text-center space-y-2 transition-all duration-300">
+                                    <div class="w-12 h-12 rounded-xl bg-slate-950 flex items-center justify-center text-brand-cyan text-xl font-bold border border-slate-800 shadow-md">
+                                        <i class="fa-solid fa-paper-plane"></i>
+                                    </div>
+                                    <div class="space-y-0.5">
+                                        <div class="text-xs font-bold text-slate-200">Smartlead Mail</div>
+                                        <div class="text-[9px] text-slate-500 font-mono">Nurture Sequence</div>
+                                    </div>
+                                    <span class="text-[9px] font-mono px-2 py-0.5 bg-brand-cyan/5 border border-brand-cyan/10 rounded-full text-brand-cyan">Dynamic Sequence</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Developer Logs Dashboard (Right Pane) -->
+                    <div class="lg:col-span-4 bg-slate-900/60 rounded-3xl border border-slate-800/80 p-5 flex flex-col justify-between min-h-[500px]">
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                                <span class="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
+                                    <i class="fa-solid fa-terminal text-brand-cyan"></i> GTM Process Logs
+                                </span>
+                                <span id="log-status" class="text-[10px] font-mono px-2 py-0.5 bg-slate-950 text-slate-400 rounded border border-slate-800">STANDBY</span>
+                            </div>
+
+                            <div id="terminal-screen" class="bg-slate-950 border border-slate-850 p-4 rounded-2xl font-mono text-[11px] text-slate-300 h-80 overflow-y-auto space-y-2">
+                                <div class="text-slate-500">// System initialized. Awaiting pipeline action.</div>
+                                <div class="text-slate-500">// Select "Run Live Pipeline Test" to observe model flow.</div>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-950 border border-slate-850 p-4 rounded-2xl space-y-3 mt-4">
+                            <h4 class="text-xs font-bold text-slate-300">MARKETER CAPABILITY IMPACT</h4>
+                            <div class="grid grid-cols-2 gap-2 text-center">
+                                <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800/60">
+                                    <div class="text-lg font-black text-white">10x</div>
+                                    <div class="text-[9px] text-slate-400 uppercase font-semibold">Outbound Output</div>
+                                </div>
+                                <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800/60">
+                                    <div class="text-lg font-black text-white">0</div>
+                                    <div class="text-[9px] text-slate-400 uppercase font-semibold">Manual Research</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Tab 3: Outreach AI Copilot (Active Gemini API pitch generator) -->
+            <section id="tab-copilot" class="space-y-6 hidden">
+                <!-- Explanatory Header Box -->
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-slate-900/40 p-5 rounded-2xl border border-slate-800/80">
+                    <div class="space-y-1">
+                        <h2 class="text-xl md:text-2xl font-extrabold text-white tracking-tight flex items-center gap-2">
+                            <i class="fa-solid fa-wand-magic-sparkles text-brand-pink text-lg"></i>
+                            The GTM Outreach Pitch Copilot
+                        </h2>
+                        <p class="text-sm text-slate-400">Generate personalized enterprise platform proposal blueprints injected with live financial variables.</p>
+                    </div>
+                </div>
+
+                <!-- Input Formulation Panel & Live Generator -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    
+                    <!-- Form Input Configuration Settings (Left Side) -->
+                    <div class="lg:col-span-5 bg-brand-card/30 rounded-3xl p-6 border border-slate-800/80 space-y-6">
+                        <div class="space-y-4">
+                            <h3 class="text-sm font-bold text-white uppercase tracking-wider">Configure Proposal Parameters</h3>
+                            
+                            <!-- Display Sync Status Banner -->
+                            <div id="sync-banner" class="bg-emerald-400/10 border border-emerald-400/30 p-3 rounded-xl flex items-center justify-between gap-3 text-xs text-emerald-400 font-semibold">
+                                <span class="flex items-center gap-1.5">
+                                    <i class="fa-solid fa-circle-check"></i> Connected Simulator Variables Synced
+                                </span>
+                                <button onclick="resetSync()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-rotate-left"></i></button>
+                            </div>
+
+                            <div class="space-y-2">
+                                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider">Enterprise Target Name</label>
+                                <input type="text" id="copilot-partnerName" value="Shopify" class="w-full bg-slate-900/80 border border-slate-800 p-3 rounded-xl text-sm text-white focus:outline-none focus:border-brand-pink">
+                            </div>
+
+                            <div class="space-y-2">
+                                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider">Proposal Tone / Angle</label>
+                                <select id="copilot-tone" class="w-full bg-slate-900/80 border border-slate-800 p-3 rounded-xl text-sm text-white focus:outline-none focus:border-brand-pink">
+                                    <option value="highly financial, aggressive business case, direct ROI priority">High-Conviction Financial Case</option>
+                                    <option value="collaborative, strategic ecosystem integration, mutual platform value">Strategic Ecosystem Partner</option>
+                                    <option value="casual, innovative, misfit attitude focused on changing media">Creative / Disruption Focus</option>
+                                </select>
+                            </div>
+
+                            <!-- Embedded API Key input - allows user entry or empty defaults -->
+                            <div class="space-y-2">
+                                <div class="flex justify-between items-center">
+                                    <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider">Gemini API Key (Optional)</label>
+                                    <span class="text-[10px] text-slate-500 font-mono">Defaults to canvas runtime</span>
+                                </div>
+                                <input type="password" id="api-key" placeholder="Enter your Gemini API key (or leave empty)" class="w-full bg-slate-900/80 border border-slate-800 p-3 rounded-xl text-sm text-white focus:outline-none focus:border-brand-pink">
+                            </div>
+                        </div>
+
+                        <button onclick="generateProposal()" class="w-full py-4 px-6 bg-gradient-to-r from-brand-pink to-brand-violet text-white text-sm font-extrabold rounded-xl hover:shadow-lg hover:shadow-brand-pink/10 transition-all active:scale-98 flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-rocket animate-bounce"></i> Generate Partnership Blueprint
+                        </button>
+                    </div>
+
+                    <!-- Output Dynamic Response & Citation sources panel (Right Side) -->
+                    <div class="lg:col-span-7 bg-slate-900/60 rounded-3xl p-6 border border-slate-800/80 flex flex-col justify-between space-y-6">
+                        <div class="space-y-3 flex-1 flex flex-col justify-between">
+                            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                                <span class="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
+                                    <i class="fa-solid fa-file-invoice text-brand-pink"></i> Generated Outreach Asset
+                                </span>
+                                <button onclick="copyOutput()" class="text-xs text-slate-400 hover:text-white transition flex items-center gap-1">
+                                    <i class="fa-solid fa-copy"></i> Copy Proposal
+                                </button>
+                            </div>
+
+                            <div id="loading-spinner" class="hidden flex-1 flex flex-col items-center justify-center space-y-3 py-12">
+                                <div class="h-10 w-10 border-4 border-slate-800 border-t-brand-pink rounded-full animate-spin"></div>
+                                <span class="text-xs font-mono text-slate-400">Synthesizing monetization strategy with Gemini Model...</span>
+                            </div>
+
+                            <div id="copilot-output" class="flex-1 min-h-[300px] max-h-[500px] overflow-y-auto bg-slate-950 border border-slate-850 p-6 rounded-2xl font-mono text-xs text-slate-300 whitespace-pre-wrap leading-relaxed">
+Dear Head of Partnerships,
+
+We noticed Shopify merchants are leaving massive revenue on the table by not incorporating instant ad creation mechanisms.
+
+Let's change that. By integrating Misfits & Machines, we project Shopify can capture $13.5M in Net New ARR over the next 12 months.
+
+Let's jump on a quick 10-minute briefing next week.
+                            </div>
+                        </div>
+
+                        <!-- Feedback or custom prompt helper banner -->
+                        <div id="copy-notification" class="hidden bg-slate-950 border border-brand-cyan/20 p-3 rounded-xl flex items-center justify-center text-xs text-brand-cyan font-mono animate-pulse">
+                            Successfully copied proposal to clipboard!
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+        // Static Archetypes configurations
+        const ARCHETYPES = {
+            shopify: {
+                name: 'Shopify',
+                userBase: 1750000,
+                adoptionRate: 2.5,
+                monthlySpend: 150,
+                revShare: 30
+            },
+            hubspot: {
+                name: 'HubSpot',
+                userBase: 184000,
+                adoptionRate: 4.5,
+                monthlySpend: 400,
+                revShare: 25
+            },
+            klaviyo: {
+                name: 'Klaviyo',
+                userBase: 130000,
+                adoptionRate: 5.0,
+                monthlySpend: 300,
+                revShare: 35
+            },
+            custom: {
+                name: 'Custom Partner',
+                userBase: 500000,
+                adoptionRate: 3.0,
+                monthlySpend: 250,
+                revShare: 30
+            }
+        };
+
+        // Active Application State Variables
+        let activeTab = 'simulator';
+        let currentPartner = 'Shopify';
+        let currentMetrics = {
+            userBase: 500000,
+            adoptionRate: 3.0,
+            monthlySpend: 250,
+            revShare: 30,
+            partnerARR: 13500000,
+            retainedARR: 31500000,
+            adoptingAccounts: 15000
+        };
+
+        // Initialize App on Window Load
+        window.onload = function() {
+            calculateSimulator();
+        };
+
+        // Global Tab Switching System
+        function switchTab(tabId) {
+            activeTab = tabId;
+            
+            // Hide all views
+            document.getElementById('tab-simulator').classList.add('hidden');
+            document.getElementById('tab-gtm').classList.add('hidden');
+            document.getElementById('tab-copilot').classList.add('hidden');
+            
+            // Remove navigation button active styles
+            document.getElementById('btn-simulator').className = "w-full flex items-center gap-3 px-3 py-3 rounded-xl transition text-left group text-slate-400 hover:text-slate-100 hover:bg-slate-900/60 border-l-4 border-transparent";
+            document.getElementById('btn-gtm').className = "w-full flex items-center gap-3 px-3 py-3 rounded-xl transition text-left group text-slate-400 hover:text-slate-100 hover:bg-slate-900/60 border-l-4 border-transparent";
+            document.getElementById('btn-copilot').className = "w-full flex items-center gap-3 px-3 py-3 rounded-xl transition text-left group text-slate-400 hover:text-slate-100 hover:bg-slate-900/60 border-l-4 border-transparent";
+            
+            // Display active view
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
+            
+            // Highlight active navigation button
+            const activeBtn = document.getElementById('btn-' + tabId);
+            activeBtn.className = "w-full flex items-center gap-3 px-3 py-3 rounded-xl transition text-left group bg-gradient-to-r from-brand-violet/20 to-transparent border-l-4 border-brand-violet text-white";
+        }
+
+        // Update model archetype selection
+        function selectArchetype(archKey) {
+            const arch = ARCHETYPES[archKey];
+            currentPartner = arch.name;
+            
+            // Sync values to DOM controllers
+            document.getElementById('input-userBase').value = arch.userBase;
+            document.getElementById('input-adoptionRate').value = arch.adoptionRate;
+            document.getElementById('input-monthlySpend').value = arch.monthlySpend;
+            document.getElementById('input-revShare').value = arch.revShare;
+            
+            // Update Active Archetype visually
+            document.querySelectorAll('[id^="arch-"]').forEach(el => {
+                el.className = "p-3 text-center rounded-xl bg-slate-900/60 border border-slate-800 hover:border-brand-pink text-slate-300 transition-all font-semibold text-xs py-2.5";
+            });
+            document.getElementById('arch-' + archKey).className = "p-3 text-center rounded-xl bg-slate-900/60 border border-brand-pink text-white bg-brand-pink/5 font-semibold text-xs py-2.5";
+            
+            // Sync with outreach parameter target name
+            document.getElementById('copilot-partnerName').value = currentPartner;
+            
+            calculateSimulator();
+        }
+
+        // Run live calculations on model parameters
+        function calculateSimulator() {
+            const userBase = parseFloat(document.getElementById('input-userBase').value);
+            const adoptionRate = parseFloat(document.getElementById('input-adoptionRate').value);
+            const monthlySpend = parseFloat(document.getElementById('input-monthlySpend').value);
+            const revShare = parseFloat(document.getElementById('input-revShare').value);
+            
+            // UI text labels syncing
+            document.getElementById('label-userBase').innerText = Number(userBase).toLocaleString();
+            document.getElementById('label-adoptionRate').innerText = adoptionRate.toFixed(1) + '%';
+            document.getElementById('label-monthlySpend').innerText = '$' + monthlySpend;
+            document.getElementById('label-revShare').innerText = revShare + '%';
+            
+            // Model calculations
+            const adoptingAccounts = Math.round(userBase * (adoptionRate / 100));
+            const totalMonthlySpend = adoptingAccounts * monthlySpend;
+            const partnerMonthlyARR = totalMonthlySpend * (revShare / 100);
+            const partnerAnnualARR = partnerMonthlyARR * 12;
+            const mmAnnualARR = (totalMonthlySpend - partnerMonthlyARR) * 12;
+            
+            // Format to dynamic metric labels
+            document.getElementById('output-adoptingAccounts').innerText = Number(adoptingAccounts).toLocaleString();
+            document.getElementById('output-partnerARR').innerText = formatCurrency(partnerAnnualARR);
+            document.getElementById('output-retainedARR').innerText = formatCurrency(mmAnnualARR);
+            
+            // Adjust visualization splits
+            const partnerRatio = revShare;
+            const mmRatio = 100 - revShare;
+            document.getElementById('bar-partner').style.width = partnerRatio + '%';
+            document.getElementById('bar-mm').style.width = mmRatio + '%';
+            
+            // Sync output state
+            currentMetrics = {
+                userBase,
+                adoptionRate,
+                monthlySpend,
+                revShare,
+                partnerARR: partnerAnnualARR,
+                retainedARR: mmAnnualARR,
+                adoptingAccounts
+            };
+        }
+
+        function formatCurrency(value) {
+            if (value >= 1000000) {
+                return '$' + (value / 1000000).toFixed(1) + 'M';
+            } else if (value >= 1000) {
+                return '$' + (value / 1000).toFixed(0) + 'K';
+            }
+            return '$' + value;
+        }
+
+        // GTM Automation Tracker Log Visual Dry Run
+        function runGtmDryRun() {
+            const btn = document.getElementById('btn-dryrun');
+            const terminal = document.getElementById('terminal-screen');
+            const status = document.getElementById('log-status');
+            
+            btn.disabled = true;
+            terminal.innerHTML = "";
+            status.innerText = "RUNNING";
+            status.className = "text-[10px] font-mono px-2 py-0.5 bg-brand-cyan/10 text-brand-cyan rounded border border-brand-cyan/30 animate-pulse";
+            
+            const logs = [
+                { text: "[System] Booting autonomous workflow velocity pipeline...", delay: 200, node: null },
+                { text: "[Clay] Pulling targeted corporate profiles matching enterprise aggregators criteria...", delay: 1000, node: 1 },
+                { text: "[Clay] Sourced 147 target organizations with high partner overlap indexes.", delay: 1800, node: 1 },
+                { text: "[Apollo] Scanning company hierarchy databases for senior VP of Partnerships...", delay: 2600, node: 2 },
+                { text: "[Apollo] Successfully extracted contact metrics and verified email tokens for 89 key decisions makers.", delay: 3600, node: 2 },
+                { text: "[Claude] Initiating localized financial analysis agent on scraped 10-K reports...", delay: 4400, node: 3 },
+                { text: "[Claude] Generated bespoke business model maps with current " + currentPartner + " metrics.", delay: 5600, node: 3 },
+                { text: "[ElevenLabs] Initializing specific conversational voice cloning sequences...", delay: 6500, node: 4 },
+                { text: "[ElevenLabs] Audio asset customized synthesized for pitch delivery.", delay: 7800, node: 4 },
+                { text: "[Smartlead] Composing personalized email structures containing live monetization reports...", delay: 8500, node: 5 },
+                { text: "[Smartlead] Dispatched multi-channel campaign. Awaiting partnership feedback.", delay: 9800, node: 5 },
+                { text: "[Success] GTM operational velocity run complete. Pipeline status active.", delay: 10200, node: null }
+            ];
+            
+            // Loop sequential logging outputs
+            logs.forEach(log => {
+                setTimeout(() => {
+                    const line = document.createElement('div');
+                    line.className = log.text.includes("[System]") || log.text.includes("[Success]") ? "text-slate-400 font-bold" : "text-slate-300";
+                    line.innerText = `> ${log.text}`;
+                    terminal.appendChild(line);
+                    terminal.scrollTop = terminal.scrollHeight;
+                    
+                    // Highlight active node visual state
+                    if (log.node) {
+                        document.querySelectorAll('[id^="node-"]').forEach(node => {
+                            node.className = "bg-slate-900/90 border border-slate-800 p-4 rounded-2xl flex flex-col items-center text-center space-y-2 transition-all duration-300";
+                        });
+                        const activeNode = document.getElementById('node-' + log.node);
+                        activeNode.className = "bg-brand-cyan/5 border-2 border-brand-cyan p-4 rounded-2xl flex flex-col items-center text-center space-y-2 transition-all duration-300 shadow-lg shadow-brand-cyan/10 scale-105";
+                    }
+                    
+                    if (log.text.includes("[Success]")) {
+                        btn.disabled = false;
+                        status.innerText = "COMPLETED";
+                        status.className = "text-[10px] font-mono px-2 py-0.5 bg-emerald-500/10 text-emerald-400 rounded border border-emerald-500/30";
+                    }
+                }, log.delay);
+            });
+        }
+
+        // Fast tracking data indicators from tab simulator directly into AI Generator tab
+        function transferToCopilot() {
+            document.getElementById('copilot-partnerName').value = currentPartner;
+            
+            // Visually trigger syncing banner
+            const banner = document.getElementById('sync-banner');
+            banner.className = "bg-emerald-400/10 border border-emerald-400/30 p-3 rounded-xl flex items-center justify-between gap-3 text-xs text-emerald-400 font-semibold animate-bounce";
+            setTimeout(() => {
+                banner.className = "bg-emerald-400/10 border border-emerald-400/30 p-3 rounded-xl flex items-center justify-between gap-3 text-xs text-emerald-400 font-semibold";
+            }, 1000);
+            
+            switchTab('copilot');
+        }
+
+        function resetSync() {
+            currentMetrics = {
+                userBase: 500000,
+                adoptionRate: 3.0,
+                monthlySpend: 250,
+                revShare: 30,
+                partnerARR: 13500000,
+                retainedARR: 31500000,
+                adoptingAccounts: 15000
+            };
+            document.getElementById('copilot-partnerName').value = "Shopify";
+            alert("Metrics reset to simulator standard!");
+        }
+
+        // Interfacing Gemini LLM models directly
+        async function generateProposal() {
+            const partnerName = document.getElementById('copilot-partnerName').value;
+            const toneAngle = document.getElementById('copilot-tone').value;
+            const outputArea = document.getElementById('copilot-output');
+            const loading = document.getElementById('loading-spinner');
+            const keyInput = document.getElementById('api-key').value;
+            
+            outputArea.classList.add('hidden');
+            loading.classList.remove('hidden');
+            
+            // Fallback key detection mechanism
+            const apiKey = keyInput || "";
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+            
+            // Pre-calculate variables mapping directly from simulator inputs
+            const adoptingAccs = Number(currentMetrics.adoptingAccounts).toLocaleString();
+            const partnerARRFormatted = formatCurrency(currentMetrics.partnerARR);
+            const userBaseFormatted = Number(currentMetrics.userBase).toLocaleString();
+            const adoptionRateFormatted = currentMetrics.adoptionRate.toFixed(1) + '%';
+            
+            const systemPrompt = `You are a world-class Head of Growth & Marketing at Misfits & Machines, pitching dynamic integration partnerships. Your target audience is a highly commercial, metric-focused VP of Partnerships. Frame the value proposition with bold conviction, using realistic financial assumptions. Emphasize that Misfits & Machines builds transformative technology that helps legacy platforms unlock massive advertising volume. Always write in a structured, concise, and direct style. Ensure you format output professionally as a business pitch proposal.`;
+            
+            const userQuery = `Write a compelling enterprise partnership outreach proposal to the VP of Partnerships at ${partnerName}.
+            
+            We are proposing to embed a dynamic programmatic audio and video ad creation feature directly inside their merchant app store ecosystem. 
+            
+            Use the following exact metrics sourced directly from our live monetization database model:
+            - Target Partner Merchant Base: ${userBaseFormatted} active users
+            - Projected Integration Adoption Rate: ${adoptionRateFormatted}
+            - Estimated Net New Adopting Accounts: ${adoptingAccs}
+            - Partner Split Incremental ARR Contribution: ${partnerARRFormatted} net ARR inside their system over the first 12 months.
+            
+            Compose the final proposal with a ${toneAngle} approach. Keep the length punchy, action-focused, and target an active calendar invite meeting booking next week.`;
+            
+            const payload = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                systemInstruction: {
+                    parts: [{ text: systemPrompt }]
+                }
+            };
+            
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                const result = await response.json();
+                const text = result?.candidates?.[0]?.content?.parts?.[0]?.text;
+                
+                if (text) {
+                    outputArea.innerText = text;
+                } else {
+                    // Fallback simulated model outputs if API returns unexpected formats or is throttled
+                    outputArea.innerText = generateFallbackProposal(partnerName, adoptingAccs, partnerARRFormatted, toneAngle);
+                }
+            } catch (err) {
+                console.error("Gemini API call timed out, running dynamic client generator fallback...", err);
+                outputArea.innerText = generateFallbackProposal(partnerName, adoptingAccs, partnerARRFormatted, toneAngle);
+            } finally {
+                loading.classList.add('hidden');
+                outputArea.classList.remove('hidden');
+            }
+        }
+
+        // Beautiful backup generation engine for offline execution
+        function generateFallbackProposal(partnerName, adoptingAccs, partnerARR, tone) {
+            return `SUBJECT: Core Ecosystem Expansion Monetization Analysis // Misfits & Machines x ${partnerName}
+
+Dear VP of Partnerships,
+
+The future of media deployment belongs to platforms that can turn static concepts into instant programmatic results. 
+
+Based on active metrics mapping of ${partnerName}'s platform ecosystem, embedding a native, AI-powered ad-generation system would empower your merchant base to machine remarkable ad creative instantly inside their admin panel.
+
+We have structured an initial economic run showing the performance implications:
+- Targeted Integration Adoption: ${adoptingAccs} verified merchants scaling active ad output.
+- Incremental Partner Platform Revenue: ${partnerARR} in net-new, high-margin Platform ARR within Year 1 under a shared economics layout.
+
+Most platforms let their users struggle with external campaign assets. We believe the future belongs to bold integrations executed with seamless commercial precision. 
+
+Let's align next week for a 10-minute whiteboard walkthrough of our developer SDK.
+
+Best regards,
+
+Growth Engineering Team
+Misfits & Machines
+misfitsandmachines.com`;
+        }
+
+        // Custom script clipboard copy selector
+        function copyOutput() {
+            const textToCopy = document.getElementById('copilot-output').innerText;
+            const hiddenInput = document.createElement('textarea');
+            hiddenInput.value = textToCopy;
+            document.body.appendChild(hiddenInput);
+            hiddenInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(hiddenInput);
+            
+            const banner = document.getElementById('copy-notification');
+            banner.classList.remove('hidden');
+            setTimeout(() => {
+                banner.classList.add('hidden');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
